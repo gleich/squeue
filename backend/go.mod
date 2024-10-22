@@ -2,7 +2,11 @@ module github.com/gleich/squeue
 
 go 1.23.2
 
-require github.com/gleich/lumber/v3 v3.0.1
+require (
+	github.com/caarlos0/env/v11 v11.2.2
+	github.com/gleich/lumber/v3 v3.0.1
+	github.com/joho/godotenv v1.5.1
+)
 
 require (
 	github.com/aymanbagabas/go-osc52/v2 v2.0.1 // indirect
