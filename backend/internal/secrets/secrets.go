@@ -11,6 +11,9 @@ var SECRETS SecretsData
 type SecretsData struct {
 	ClientID     string `env:"CLIENT_ID"`
 	ClientSecret string `env:"CLIENT_SECRET"`
+
+	AccessToken  string `env:"ACCESS_TOKEN"`
+	RefreshToken string `env:"REFRESH_TOKEN"`
 }
 
 func Load() {
