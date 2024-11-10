@@ -43,6 +43,10 @@ func (t *tokens) RefreshIfNeeded() {
 		"https://accounts.spotify.com/api/token?"+params.Encode(),
 		nil,
 	)
+	if err != nil {
+		lumber.Error(err, "creating request for new token failed")
+		return
+	}
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 	req.Header.Set(
 		"Authorization",
@@ -50,10 +54,6 @@ func (t *tokens) RefreshIfNeeded() {
 			[]byte(fmt.Sprintf("%s:%s", secrets.SECRETS.ClientID, secrets.SECRETS.ClientSecret)),
 		),
 	)
-	if err != nil {
-		lumber.Error(err, "creating request for new token failed")
-		return
-	}
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
 		lumber.Error(err, "sending request for new token data failed")
@@ -68,6 +68,7 @@ func (t *tokens) RefreshIfNeeded() {
 	}
 	if resp.StatusCode != http.StatusOK {
 		lumber.ErrorMsg(resp.StatusCode, "when trying to get new token data:", string(body))
+		return
 	}
 
 	var tokens tokens
