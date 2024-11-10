@@ -13,7 +13,7 @@ func main() {
 	tokens := spotify.LoadTokens()
 	tokens.RefreshIfNeeded()
 
-	currentSong, err := spotify.GetCurrentSong(tokens)
+	currentSong, err := spotify.GetQueue(tokens)
 	if err != nil {
 		lumber.Fatal(err, "failed to load current song")
 	}
